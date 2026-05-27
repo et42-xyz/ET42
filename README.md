@@ -1,0 +1,7 @@
+ET42 Launchpad has constructed a native graphic-token swap protocol layer built upon the Uniswap V4 Hooks mechanism.
+
+The core concept is that every newly launched token no longer follows the traditional, fragmented path of "first deploying a Pair, then attaching a Router." Instead, liquidity is created as a Hooked Pool under the Uniswap V4 PoolManager (Singleton) architecture. By injecting custom logic into critical callbacks such as beforeSwap and afterSwap, the protocol executes launchpad-specific rules directly on-chain.
+
+Specifically, the Hook contract executes functionalities inline within the swap lifecycle as a pool "plugin", including tiered fee distribution (launchpad platform fees, creator revenue sharing, and buyback-and-burn), directional fee differentiation (such as distinct Buy/Sell tax rates or cooldown mechanisms), day-one liquidity protection (minimum reserve thresholds and maximum slippage fences), and LP incentive accounting.
+
+By leveraging Uniswap V4’s Flash Accounting and transient storage, all of this logic runs with near-native Gas efficiency. As a result, from the exact moment of launch, tokens possess auditable, composable, and migration-free native AMM liquidity. Swap behaviors are constrained by the Hook without sacrificing the security of the core Uniswap protocol, allowing seamless integration with cross-chain DEX aggregators and routers in the future.
